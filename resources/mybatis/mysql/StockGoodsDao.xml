@@ -1,0 +1,1437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 库存商品表映射文件 stock_goods -->
+<mapper namespace="com.jd.las.spare.stock.core.dao.StockGoodsDao">
+
+    <!-- 映射关系 -->
+    <resultMap id="resultMap" type="com.jd.las.spare.domain.stock.StockGoods">
+        <id column="id" property="id" jdbcType="BIGINT" />                                                      <!-- 主键 -->
+        <result column="company_code" property="companyCode" jdbcType="VARCHAR" />                              <!-- 总公司编码 -->
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />                              <!-- 总公司名称 -->
+        <result column="distrib_center_code" property="distribCenterCode" jdbcType="VARCHAR" />                 <!-- 配送中心编码 -->
+        <result column="distrib_center_name" property="distribCenterName" jdbcType="VARCHAR" />                 <!-- 配送中心名称 -->
+        <result column="warehouse_code" property="warehouseCode" jdbcType="VARCHAR" />                          <!-- 库房编码 -->
+        <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />                          <!-- 库房名称 -->
+        <result column="spare_code" property="spareCode" jdbcType="VARCHAR" />                                  <!-- 备件条码 -->
+        <result column="category_first_code" property="categoryFirstCode" jdbcType="VARCHAR" />                 <!-- 商品一级分类编码 -->
+        <result column="category_first_name" property="categoryFirstName" jdbcType="VARCHAR" />                 <!-- 商品一级分类名称 -->
+        <result column="category_second_code" property="categorySecondCode" jdbcType="VARCHAR" />               <!-- 商品二级分类编码 -->
+        <result column="category_second_name" property="categorySecondName" jdbcType="VARCHAR" />               <!-- 商品二级分类名称 -->
+        <result column="category_third_code" property="categoryThirdCode" jdbcType="VARCHAR" />                 <!-- 商品三级分类编码 -->
+        <result column="category_third_name" property="categoryThirdName" jdbcType="VARCHAR" />                 <!-- 商品三级分类名称 -->
+        <result column="brand_code" property="brandCode" jdbcType="VARCHAR" />                                  <!-- 品牌编码 -->
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR" />                                  <!-- 品牌名称 -->
+        <result column="vendor_code" property="vendorCode" jdbcType="VARCHAR" />                                <!-- 供货商编码 -->
+        <result column="vendor_name" property="vendorName" jdbcType="VARCHAR" />                                <!-- 供货商名称 -->
+        <result column="goods_owner_code" property="goodsOwnerCode" jdbcType="VARCHAR" />                       <!-- 货主编码 -->
+        <result column="goods_owner_name" property="goodsOwnerName" jdbcType="VARCHAR" />                       <!-- 货主名称 -->
+        <result column="goods_sku" property="goodsSku" jdbcType="VARCHAR" />                                    <!-- 商品SKU编码 -->
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />                                  <!-- 商品名称 -->
+        <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />                                      <!-- 商品序列号 -->
+        <result column="is_suit" property="isSuit" jdbcType="TINYINT" />                                        <!-- 是否套装(1:是;0:否) -->
+        <result column="suit_id" property="suitId" jdbcType="VARCHAR" />                                        <!-- 套装编号（取自基础数据套装商品表） -->
+        <result column="is_binded" property="isBinded" jdbcType="TINYINT" />                                    <!-- 是否已绑定(0:否,1:是) -->
+        <result column="is_main_goods" property="isMainGoods" jdbcType="TINYINT" />                             <!-- 是否主商品（1:是;0:否） -->
+        <result column="is_manual_unbundling" property="isManualUnbundling" jdbcType="TINYINT" />               <!-- 是否手动解绑（1:是;0:否） -->
+        <result column="refer_spare_code" property="referSpareCode" jdbcType="VARCHAR" />                       <!-- 附商品的主备件条码 -->
+        <result column="goods_package_code" property="goodsPackageCode" jdbcType="VARCHAR" />                   <!-- 产品包装编码( 0:无包装; 1:有非新; 2:新) -->
+        <result column="goods_package_name" property="goodsPackageName" jdbcType="VARCHAR" />                   <!-- 产品包装编码( 0:无包装; 1:有非新; 2:新) -->
+        <result column="goods_exterior_code" property="goodsExteriorCode" jdbcType="VARCHAR" />                 <!-- 商品外观编码（ 0:严重损; 1:轻微损; 2:新） -->
+        <result column="goods_exterior_name" property="goodsExteriorName" jdbcType="VARCHAR" />                 <!-- 商品外观编码（ 0:严重损; 1:轻微损; 2:新） -->
+        <result column="goods_function_code" property="goodsFunctionCode" jdbcType="VARCHAR" />                 <!-- 商品功能编码 （0:坏; 1:好; 2:待检测） -->
+        <result column="goods_function_name" property="goodsFunctionName" jdbcType="VARCHAR" />                 <!-- 商品功能编码 （0:坏; 1:好; 2:待检测） -->
+        <result column="goods_phase_code" property="goodsPhaseCode" jdbcType="VARCHAR" />                       <!-- 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） -->
+        <result column="goods_phase_name" property="goodsPhaseName" jdbcType="VARCHAR" />                       <!-- 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） -->
+        <result column="goods_warehouse_price" property="goodsWarehousePrice" jdbcType="DECIMAL" />             <!-- 仓报价 -->
+        <result column="goods_ownership" property="goodsOwnership" jdbcType="VARCHAR" />                        <!-- 备件权属(0:京东权属;1:非京东权属) -->
+        <result column="is_broken_screen" property="isBrokenScreen" jdbcType="TINYINT" />                       <!-- 是否碎屏 (0:完好; 1:已碎屏) -->
+        <result column="is_attachment_complete" property="isAttachmentComplete" jdbcType="TINYINT" />           <!-- 附件情况（0:不完整; 1:完整） -->
+        <result column="attachment_desc" property="attachmentDesc" jdbcType="VARCHAR" />                        <!-- 附件详情 -->
+        <result column="question_desc" property="questionDesc" jdbcType="VARCHAR" />                            <!-- 问题描述 -->
+        <result column="first_identify_order" property="firstIdentifyOrder" jdbcType="VARCHAR" />               <!-- 1次鉴定单 -->
+        <result column="first_identify_result" property="firstIdentifyResult" jdbcType="VARCHAR" />             <!-- 1次鉴定结果 -->
+        <result column="first_identify_url" property="firstIdentifyUrl" jdbcType="VARCHAR" />                   <!-- 1次鉴定URL -->
+        <result column="secondary_identify_order" property="secondaryIdentifyOrder" jdbcType="VARCHAR" />       <!-- 2次鉴定单 -->
+        <result column="secondary_identify_result" property="secondaryIdentifyResult" jdbcType="VARCHAR" />     <!-- 2次鉴定结果 -->
+        <result column="secondary_identify_url" property="secondaryIdentifyUrl" jdbcType="VARCHAR" />           <!-- 2次鉴定URL -->
+        <result column="stock_in_doc_id" property="stockInDocId" jdbcType="VARCHAR" />                          <!-- 入库单编号 -->
+        <result column="stock_out_doc_id" property="stockOutDocId" jdbcType="VARCHAR" />                        <!-- 出库单编号 -->
+        <result column="unpacking_time" property="unpackingTime" jdbcType="TIMESTAMP" />                        <!-- 拆包登记时间 -->
+        <result column="print_count" property="printCount" jdbcType="INTEGER" />                                <!-- 打印次数 -->
+        <result column="duty_rate_customer_service" property="dutyRateCustomerService" jdbcType="INTEGER" />    <!-- 客服责任占比 -->
+        <result column="duty_rate_sales" property="dutyRateSales" jdbcType="INTEGER" />                         <!-- 采销责任占比 -->
+        <result column="duty_rate_carrier" property="dutyRateCarrier" jdbcType="INTEGER" />                     <!-- 承运商责任占比 -->
+        <result column="duty_rate_vendor" property="dutyRateVendor" jdbcType="INTEGER" />                       <!-- 供应商责任占比 -->
+        <result column="binding_time" property="bindingTime" jdbcType="TIMESTAMP" />                            <!-- 绑定时间 -->
+        <result column="remark" property="remark" jdbcType="VARCHAR" />                                         <!-- 备注 -->
+        <result column="version" property="version" jdbcType="VARCHAR" />                                       <!-- 数据版本 -->
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />                                <!-- 创建人 -->
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />                              <!-- 创建时间 -->
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />                                <!-- 修改人 -->
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />                              <!-- 修改时间 -->
+        <result column="is_delete" property="isDelete" jdbcType="TINYINT" />                                    <!-- 是否删除（1：是；0：否） -->
+        <result column="ts" property="ts" jdbcType="TIMESTAMP" />                                               <!-- 时间戳 -->
+    </resultMap>
+
+    <!-- 查询列 -->
+    <sql id="queryColumns">
+        <![CDATA[
+            id,                             /* 主键 */
+            company_code,                   /* 总公司编码 */
+            company_name,                   /* 总公司名称 */
+            distrib_center_code,            /* 配送中心编码 */
+            distrib_center_name,            /* 配送中心名称 */
+            warehouse_code,                 /* 库房编码 */
+            warehouse_name,                 /* 库房名称 */
+            spare_code,                     /* 备件条码 */
+            category_first_code,            /* 商品一级分类编码 */
+            category_first_name,            /* 商品一级分类名称 */
+            category_second_code,           /* 商品二级分类编码 */
+            category_second_name,           /* 商品二级分类名称 */
+            category_third_code,            /* 商品三级分类编码 */
+            category_third_name,            /* 商品三级分类名称 */
+            brand_code,                     /* 品牌编码 */
+            brand_name,                     /* 品牌名称 */
+            vendor_code,                    /* 供货商编码 */
+            vendor_name,                    /* 供货商名称 */
+            goods_owner_code,               /* 货主编码 */
+            goods_owner_name,               /* 货主名称 */
+            goods_sku,                      /* 商品SKU编码 */
+            goods_name,                     /* 商品名称 */
+            goods_sn,                       /* 商品序列号 */
+            is_suit,                        /* 是否套装(1:是;0:否) */
+            suit_id,                        /* 套装编号（取自基础数据套装商品表） */
+            is_binded,                      /* 是否已绑定(0:否,1:是) */
+            is_main_goods,                  /* 是否主商品（1:是;0:否） */
+            is_manual_unbundling,           /* 是否手动解绑（1:是;0:否） */
+            refer_spare_code,               /* 附商品的主备件条码 */
+            goods_package_code,             /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_package_name,             /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_exterior_code,            /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_exterior_name,            /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_function_code,            /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_function_name,            /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_phase_code,               /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_phase_name,               /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_warehouse_price,          /* 仓报价 */
+            goods_ownership,                /* 备件权属(0:京东权属;1:非京东权属) */
+            is_broken_screen,               /* 是否碎屏 (0:完好; 1:已碎屏) */
+            is_attachment_complete,         /* 附件情况（0:不完整; 1:完整） */
+            attachment_desc,                /* 附件详情 */
+            question_desc,                  /* 问题描述 */
+            first_identify_order,           /* 1次鉴定单 */
+            first_identify_result,          /* 1次鉴定结果 */
+            first_identify_url,             /* 1次鉴定URL */
+            secondary_identify_order,       /* 2次鉴定单 */
+            secondary_identify_result,      /* 2次鉴定结果 */
+            secondary_identify_url,         /* 2次鉴定URL */
+            stock_in_doc_id,                /* 入库单编号 */
+            stock_out_doc_id,               /* 出库单编号 */
+            unpacking_time,                 /* 拆包登记时间 */
+            print_count,                    /* 打印次数 */
+            duty_rate_customer_service,     /* 客服责任占比 */
+            duty_rate_sales,                /* 采销责任占比 */
+            duty_rate_carrier,              /* 承运商责任占比 */
+            duty_rate_vendor,               /* 供应商责任占比 */
+            binding_time,                   /* 绑定时间 */
+            remark,                         /* 备注 */
+            version,                        /* 数据版本 */
+            create_user,                    /* 创建人 */
+            create_time,                    /* 创建时间 */
+            update_user,                    /* 修改人 */
+            update_time,                    /* 修改时间 */
+            is_delete,                      /* 是否删除（1：是；0：否） */
+            ts                              /* 时间戳 */
+        ]]>
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="queryClause">
+        <where>
+            is_delete = 0    /* 是否删除(1:是;0:否) */
+            <if test="id != null">
+                <![CDATA[ AND id = #{id, jdbcType=BIGINT} ]]>	/* 主键 */
+            </if>
+            <if test="idMin != null">
+                <![CDATA[ AND id > #{idMin, jdbcType=BIGINT} ]]>	/* 主键大于某值*/
+            </if>
+            <if test="idMax != null">
+                <![CDATA[ AND id < #{idMax, jdbcType=BIGINT} ]]>	/* 主键小于某值 */
+            </if>
+            <if test="companyCode != null and companyCode != ''">
+                AND company_code = #{companyCode, jdbcType=VARCHAR}    /* 总公司编码 */
+            </if>
+            <if test="companyName != null and companyName != ''">
+                AND company_name = #{companyName, jdbcType=VARCHAR}    /* 总公司名称 */
+            </if>
+            <if test="distribCenterCode != null and distribCenterCode != ''">
+                AND distrib_center_code = #{distribCenterCode, jdbcType=VARCHAR}    /* 配送中心编码 */
+            </if>
+            <if test="distribCenterName != null and distribCenterName != ''">
+                AND distrib_center_name = #{distribCenterName, jdbcType=VARCHAR}    /* 配送中心名称 */
+            </if>
+            <if test="warehouseCode != null and warehouseCode != ''">
+                AND warehouse_code = #{warehouseCode, jdbcType=VARCHAR}    /* 库房编码 */
+            </if>
+            <if test="warehouseName != null and warehouseName != ''">
+                AND warehouse_name = #{warehouseName, jdbcType=VARCHAR}    /* 库房名称 */
+            </if>
+            <if test="spareCode != null and spareCode != ''">
+                AND spare_code = #{spareCode, jdbcType=VARCHAR}    /* 备件条码 */
+            </if>
+            <if test="categoryFirstCode != null and categoryFirstCode != ''">
+                AND category_first_code = #{categoryFirstCode, jdbcType=VARCHAR}    /* 商品一级分类编码 */
+            </if>
+            <if test="categoryFirstName != null and categoryFirstName != ''">
+                AND category_first_name = #{categoryFirstName, jdbcType=VARCHAR}    /* 商品一级分类名称 */
+            </if>
+            <if test="categorySecondCode != null and categorySecondCode != ''">
+                AND category_second_code = #{categorySecondCode, jdbcType=VARCHAR}    /* 商品二级分类编码 */
+            </if>
+            <if test="categorySecondName != null and categorySecondName != ''">
+                AND category_second_name = #{categorySecondName, jdbcType=VARCHAR}    /* 商品二级分类名称 */
+            </if>
+            <if test="categoryThirdCode != null and categoryThirdCode != ''">
+                AND category_third_code = #{categoryThirdCode, jdbcType=VARCHAR}    /* 商品三级分类编码 */
+            </if>
+            <if test="categoryThirdName != null and categoryThirdName != ''">
+                AND category_third_name = #{categoryThirdName, jdbcType=VARCHAR}    /* 商品三级分类名称 */
+            </if>
+            <if test="brandCode != null and brandCode != ''">
+                AND brand_code = #{brandCode, jdbcType=VARCHAR}    /* 品牌编码 */
+            </if>
+            <if test="brandName != null and brandName != ''">
+                AND brand_name = #{brandName, jdbcType=VARCHAR}    /* 品牌名称 */
+            </if>
+            <if test="vendorCode != null and vendorCode != ''">
+                AND vendor_code = #{vendorCode, jdbcType=VARCHAR}    /* 供货商编码 */
+            </if>
+            <if test="vendorName != null and vendorName != ''">
+                AND vendor_name = #{vendorName, jdbcType=VARCHAR}    /* 供货商名称 */
+            </if>
+            <if test="goodsOwnerCode != null and goodsOwnerCode != ''">
+                AND goods_owner_code = #{goodsOwnerCode, jdbcType=VARCHAR}    /* 货主编码 */
+            </if>
+            <if test="goodsOwnerName != null and goodsOwnerName != ''">
+                AND goods_owner_name = #{goodsOwnerName, jdbcType=VARCHAR}    /* 货主名称 */
+            </if>
+            <if test="goodsSku != null and goodsSku != ''">
+                AND goods_sku = #{goodsSku, jdbcType=VARCHAR}    /* 商品SKU编码 */
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                AND goods_name = #{goodsName, jdbcType=VARCHAR}    /* 商品名称 */
+            </if>
+            <if test="goodsSn != null and goodsSn != ''">
+                AND goods_sn = #{goodsSn, jdbcType=VARCHAR}    /* 商品序列号 */
+            </if>
+            <if test="isSuit != null">
+                AND is_suit = #{isSuit, jdbcType=TINYINT}    /* 是否套装(1:是;0:否) */
+            </if>
+            <if test="suitId != null and suitId != ''">
+                AND suit_id = #{suitId, jdbcType=VARCHAR}    /* 套装编号（取自基础数据套装商品表） */
+            </if>
+            <if test="isBinded != null">
+                AND is_binded = #{isBinded, jdbcType=TINYINT}    /* 是否已绑定(0:否,1:是) */
+            </if>
+            <if test="isMainGoods != null">
+                AND is_main_goods = #{isMainGoods, jdbcType=TINYINT}    /* 是否主商品（1:是;0:否） */
+            </if>
+            <if test="isManualUnbundling != null">
+                AND is_manual_unbundling = #{isManualUnbundling, jdbcType=TINYINT}    /* 是否手动解绑（1:是;0:否） */
+            </if>
+            <if test="referSpareCode != null and referSpareCode != ''">
+                AND refer_spare_code = #{referSpareCode, jdbcType=VARCHAR}    /* 附商品的主备件条码 */
+            </if>
+            <if test="goodsPackageCode != null and goodsPackageCode != ''">
+                AND goods_package_code = #{goodsPackageCode, jdbcType=VARCHAR}    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            </if>
+            <if test="goodsPackageName != null and goodsPackageName != ''">
+                AND goods_package_name = #{goodsPackageName, jdbcType=VARCHAR}    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            </if>
+            <if test="goodsExteriorCode != null and goodsExteriorCode != ''">
+                AND goods_exterior_code = #{goodsExteriorCode, jdbcType=VARCHAR}    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            </if>
+            <if test="goodsExteriorName != null and goodsExteriorName != ''">
+                AND goods_exterior_name = #{goodsExteriorName, jdbcType=VARCHAR}    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            </if>
+            <if test="goodsFunctionCode != null and goodsFunctionCode != ''">
+                AND goods_function_code = #{goodsFunctionCode, jdbcType=VARCHAR}    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            </if>
+            <if test="goodsFunctionName != null and goodsFunctionName != ''">
+                AND goods_function_name = #{goodsFunctionName, jdbcType=VARCHAR}    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            </if>
+            <if test="goodsPhaseCode != null and goodsPhaseCode != ''">
+                AND goods_phase_code = #{goodsPhaseCode, jdbcType=VARCHAR}    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            </if>
+            <if test="goodsPhaseName != null and goodsPhaseName != ''">
+                AND goods_phase_name = #{goodsPhaseName, jdbcType=VARCHAR}    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            </if>
+            <if test="goodsWarehousePrice != null">
+                AND goods_warehouse_price = #{goodsWarehousePrice, jdbcType=DECIMAL}    /* 仓报价 */
+            </if>
+            <if test="goodsOwnership != null and goodsOwnership != ''">
+                AND goods_ownership = #{goodsOwnership, jdbcType=VARCHAR}    /* 备件权属(0:京东权属;1:非京东权属) */
+            </if>
+            <if test="isBrokenScreen != null">
+                AND is_broken_screen = #{isBrokenScreen, jdbcType=TINYINT}    /* 是否碎屏 (0:完好; 1:已碎屏) */
+            </if>
+            <if test="isAttachmentComplete != null">
+                AND is_attachment_complete = #{isAttachmentComplete, jdbcType=TINYINT}    /* 附件情况（0:不完整; 1:完整） */
+            </if>
+            <if test="attachmentDesc != null and attachmentDesc != ''">
+                AND attachment_desc = #{attachmentDesc, jdbcType=VARCHAR}    /* 附件详情 */
+            </if>
+            <if test="questionDesc != null and questionDesc != ''">
+                AND question_desc = #{questionDesc, jdbcType=VARCHAR}    /* 问题描述 */
+            </if>
+            <if test="firstIdentifyOrder != null and firstIdentifyOrder != ''">
+                AND first_identify_order = #{firstIdentifyOrder, jdbcType=VARCHAR}    /* 1次鉴定单 */
+            </if>
+            <if test="firstIdentifyResult != null and firstIdentifyResult != ''">
+                AND first_identify_result = #{firstIdentifyResult, jdbcType=VARCHAR}    /* 1次鉴定结果 */
+            </if>
+            <if test="firstIdentifyUrl != null and firstIdentifyUrl != ''">
+                AND first_identify_url = #{firstIdentifyUrl, jdbcType=VARCHAR}    /* 1次鉴定URL */
+            </if>
+            <if test="secondaryIdentifyOrder != null and secondaryIdentifyOrder != ''">
+                AND secondary_identify_order = #{secondaryIdentifyOrder, jdbcType=VARCHAR}    /* 2次鉴定单 */
+            </if>
+            <if test="secondaryIdentifyResult != null and secondaryIdentifyResult != ''">
+                AND secondary_identify_result = #{secondaryIdentifyResult, jdbcType=VARCHAR}    /* 2次鉴定结果 */
+            </if>
+            <if test="secondaryIdentifyUrl != null and secondaryIdentifyUrl != ''">
+                AND secondary_identify_url = #{secondaryIdentifyUrl, jdbcType=VARCHAR}    /* 2次鉴定URL */
+            </if>
+            <if test="stockInDocId != null and stockInDocId != ''">
+                AND stock_in_doc_id = #{stockInDocId, jdbcType=VARCHAR}    /* 入库单编号 */
+            </if>
+            <if test="stockOutDocId != null and stockOutDocId != ''">
+                AND stock_out_doc_id = #{stockOutDocId, jdbcType=VARCHAR}    /* 出库单编号 */
+            </if>
+            <if test="unpackingTimeBegin != null">
+                <![CDATA[ AND unpacking_time >= #{unpackingTimeBegin, jdbcType=TIMESTAMP} ]]>    /* 拆包登记时间开始 */
+            </if>
+            <if test="unpackingTimeEnd != null">
+                <![CDATA[ AND unpacking_time <= #{unpackingTimeEnd, jdbcType=TIMESTAMP} ]]>    /* 拆包登记时间截止 */
+            </if>
+            <if test="printCount != null">
+                AND print_count = #{printCount, jdbcType=INTEGER}    /* 打印次数 */
+            </if>
+            <if test="dutyRateCustomerService != null">
+                AND duty_rate_customer_service = #{dutyRateCustomerService, jdbcType=INTEGER}    /* 客服责任占比 */
+            </if>
+            <if test="dutyRateSales != null">
+                AND duty_rate_sales = #{dutyRateSales, jdbcType=INTEGER}    /* 采销责任占比 */
+            </if>
+            <if test="dutyRateCarrier != null">
+                AND duty_rate_carrier = #{dutyRateCarrier, jdbcType=INTEGER}    /* 承运商责任占比 */
+            </if>
+            <if test="dutyRateVendor != null">
+                AND duty_rate_vendor = #{dutyRateVendor, jdbcType=INTEGER}    /* 供应商责任占比 */
+            </if>
+            <if test="bindingTimeBegin != null">
+                <![CDATA[ AND binding_time >= #{bindingTimeBegin, jdbcType=TIMESTAMP} ]]>    /* 绑定时间开始 */
+            </if>
+            <if test="bindingTimeEnd != null">
+                <![CDATA[ AND binding_time <= #{bindingTimeEnd, jdbcType=TIMESTAMP} ]]>    /* 绑定时间截止 */
+            </if>
+            <if test="remark != null and remark != ''">
+                AND remark = #{remark, jdbcType=VARCHAR}    /* 备注 */
+            </if>
+            <if test="version != null and version != ''">
+                AND version = #{version, jdbcType=VARCHAR}    /* 数据版本 */
+            </if>
+            <if test="createUser != null and createUser != ''">
+                AND create_user = #{createUser, jdbcType=VARCHAR}    /* 创建人 */
+            </if>
+            <if test="createTimeBegin != null">
+                <![CDATA[ AND create_time >= #{createTimeBegin, jdbcType=TIMESTAMP} ]]>    /* 创建时间开始 */
+            </if>
+            <if test="createTimeEnd != null">
+                <![CDATA[ AND create_time <= #{createTimeEnd, jdbcType=TIMESTAMP} ]]>    /* 创建时间截止 */
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                AND update_user = #{updateUser, jdbcType=VARCHAR}    /* 修改人 */
+            </if>
+            <if test="updateTimeBegin != null">
+                <![CDATA[ AND update_time >= #{updateTimeBegin, jdbcType=TIMESTAMP} ]]>    /* 修改时间开始 */
+            </if>
+            <if test="updateTimeEnd != null">
+                <![CDATA[ AND update_time <= #{updateTimeEnd, jdbcType=TIMESTAMP} ]]>    /* 修改时间截止 */
+            </if>
+            <if test="isDelete != null">
+                AND is_delete = #{isDelete, jdbcType=TINYINT}    /* 是否删除（1：是；0：否） */
+            </if>
+            <if test="tsBegin != null">
+                <![CDATA[ AND ts >= #{tsBegin, jdbcType=TIMESTAMP} ]]>    /* 时间戳开始 */
+            </if>
+            <if test="tsEnd != null">
+                <![CDATA[ AND ts <= #{tsEnd, jdbcType=TIMESTAMP} ]]>    /* 时间戳截止 */
+            </if>
+            <if test="_clover != null">
+                AND MOD(id, #{_clover.serverCount, jdbcType=INTEGER}) = #{_clover.serverId, jdbcType=INTEGER}    /* Clover分片 */
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序 -->
+    <sql id="sortClause">
+        <if test="_sort != null">
+            ORDER BY 
+            <foreach collection="_sort" item="item" index="index" separator=",">
+                <choose>
+                    <when test="item.propertyName != null and item.propertyName == 'id'">
+                        id    /* 主键 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'companyCode'">
+                        company_code    /* 总公司编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'companyName'">
+                        company_name    /* 总公司名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'distribCenterCode'">
+                        distrib_center_code    /* 配送中心编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'distribCenterName'">
+                        distrib_center_name    /* 配送中心名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'warehouseCode'">
+                        warehouse_code    /* 库房编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'warehouseName'">
+                        warehouse_name    /* 库房名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'spareCode'">
+                        spare_code    /* 备件条码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categoryFirstCode'">
+                        category_first_code    /* 商品一级分类编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categoryFirstName'">
+                        category_first_name    /* 商品一级分类名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categorySecondCode'">
+                        category_second_code    /* 商品二级分类编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categorySecondName'">
+                        category_second_name    /* 商品二级分类名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categoryThirdCode'">
+                        category_third_code    /* 商品三级分类编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'categoryThirdName'">
+                        category_third_name    /* 商品三级分类名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'brandCode'">
+                        brand_code    /* 品牌编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'brandName'">
+                        brand_name    /* 品牌名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'vendorCode'">
+                        vendor_code    /* 供货商编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'vendorName'">
+                        vendor_name    /* 供货商名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsOwnerCode'">
+                        goods_owner_code    /* 货主编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsOwnerName'">
+                        goods_owner_name    /* 货主名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsSku'">
+                        goods_sku    /* 商品SKU编码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsName'">
+                        goods_name    /* 商品名称 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsSn'">
+                        goods_sn    /* 商品序列号 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isSuit'">
+                        is_suit    /* 是否套装(1:是;0:否) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'suitId'">
+                        suit_id    /* 套装编号（取自基础数据套装商品表） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isBinded'">
+                        is_binded    /* 是否已绑定(0:否,1:是) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isMainGoods'">
+                        is_main_goods    /* 是否主商品（1:是;0:否） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isManualUnbundling'">
+                        is_manual_unbundling    /* 是否手动解绑（1:是;0:否） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'referSpareCode'">
+                        refer_spare_code    /* 附商品的主备件条码 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsPackageCode'">
+                        goods_package_code    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsPackageName'">
+                        goods_package_name    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsExteriorCode'">
+                        goods_exterior_code    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsExteriorName'">
+                        goods_exterior_name    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsFunctionCode'">
+                        goods_function_code    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsFunctionName'">
+                        goods_function_name    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsPhaseCode'">
+                        goods_phase_code    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsPhaseName'">
+                        goods_phase_name    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsWarehousePrice'">
+                        goods_warehouse_price    /* 仓报价 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'goodsOwnership'">
+                        goods_ownership    /* 备件权属(0:京东权属;1:非京东权属) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isBrokenScreen'">
+                        is_broken_screen    /* 是否碎屏 (0:完好; 1:已碎屏) */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isAttachmentComplete'">
+                        is_attachment_complete    /* 附件情况（0:不完整; 1:完整） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'attachmentDesc'">
+                        attachment_desc    /* 附件详情 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'questionDesc'">
+                        question_desc    /* 问题描述 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'firstIdentifyOrder'">
+                        first_identify_order    /* 1次鉴定单 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'firstIdentifyResult'">
+                        first_identify_result    /* 1次鉴定结果 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'firstIdentifyUrl'">
+                        first_identify_url    /* 1次鉴定URL */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'secondaryIdentifyOrder'">
+                        secondary_identify_order    /* 2次鉴定单 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'secondaryIdentifyResult'">
+                        secondary_identify_result    /* 2次鉴定结果 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'secondaryIdentifyUrl'">
+                        secondary_identify_url    /* 2次鉴定URL */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'stockInDocId'">
+                        stock_in_doc_id    /* 入库单编号 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'stockOutDocId'">
+                        stock_out_doc_id    /* 出库单编号 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'unpackingTime'">
+                        unpacking_time    /* 拆包登记时间 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'printCount'">
+                        print_count    /* 打印次数 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'dutyRateCustomerService'">
+                        duty_rate_customer_service    /* 客服责任占比 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'dutyRateSales'">
+                        duty_rate_sales    /* 采销责任占比 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'dutyRateCarrier'">
+                        duty_rate_carrier    /* 承运商责任占比 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'dutyRateVendor'">
+                        duty_rate_vendor    /* 供应商责任占比 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'bindingTime'">
+                        binding_time    /* 绑定时间 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'remark'">
+                        remark    /* 备注 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'version'">
+                        version    /* 数据版本 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'createUser'">
+                        create_user    /* 创建人 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'createTime'">
+                        create_time    /* 创建时间 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'updateUser'">
+                        update_user    /* 修改人 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'updateTime'">
+                        update_time    /* 修改时间 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'isDelete'">
+                        is_delete    /* 是否删除（1：是；0：否） */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <when test="item.propertyName != null and item.propertyName == 'ts'">
+                        ts    /* 时间戳 */
+                        <choose>
+                            <when test="item.ascending">ASC</when>
+                            <otherwise>DESC</otherwise>
+                        </choose>
+                    </when>
+                    <otherwise>ts DESC</otherwise>
+                </choose>
+            </foreach>
+        </if>
+    </sql>
+
+    <!-- 分页 -->
+    <sql id="pageClause">
+        <if test="_page != null">
+            limit #{_page.offset, jdbcType=INTEGER}, #{_page.limit, jdbcType=INTEGER}
+        </if>
+    </sql>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.jd.las.spare.domain.stock.StockGoods" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO stock_goods (
+            company_code,                  /* 总公司编码 */
+            company_name,                  /* 总公司名称 */
+            distrib_center_code,           /* 配送中心编码 */
+            distrib_center_name,           /* 配送中心名称 */
+            warehouse_code,                /* 库房编码 */
+            warehouse_name,                /* 库房名称 */
+            spare_code,                    /* 备件条码 */
+            category_first_code,           /* 商品一级分类编码 */
+            category_first_name,           /* 商品一级分类名称 */
+            category_second_code,          /* 商品二级分类编码 */
+            category_second_name,          /* 商品二级分类名称 */
+            category_third_code,           /* 商品三级分类编码 */
+            category_third_name,           /* 商品三级分类名称 */
+            brand_code,                    /* 品牌编码 */
+            brand_name,                    /* 品牌名称 */
+            vendor_code,                   /* 供货商编码 */
+            vendor_name,                   /* 供货商名称 */
+            goods_owner_code,              /* 货主编码 */
+            goods_owner_name,              /* 货主名称 */
+            goods_sku,                     /* 商品SKU编码 */
+            goods_name,                    /* 商品名称 */
+            goods_sn,                      /* 商品序列号 */
+            is_suit,                       /* 是否套装(1:是;0:否) */
+            suit_id,                       /* 套装编号（取自基础数据套装商品表） */
+            is_binded,                     /* 是否已绑定(0:否,1:是) */
+            is_main_goods,                 /* 是否主商品（1:是;0:否） */
+            is_manual_unbundling,          /* 是否手动解绑（1:是;0:否） */
+            refer_spare_code,              /* 附商品的主备件条码 */
+            goods_package_code,            /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_package_name,            /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_exterior_code,           /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_exterior_name,           /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_function_code,           /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_function_name,           /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_phase_code,              /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_phase_name,              /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_warehouse_price,         /* 仓报价 */
+            goods_ownership,               /* 备件权属(0:京东权属;1:非京东权属) */
+            is_broken_screen,              /* 是否碎屏 (0:完好; 1:已碎屏) */
+            is_attachment_complete,        /* 附件情况（0:不完整; 1:完整） */
+            attachment_desc,               /* 附件详情 */
+            question_desc,                 /* 问题描述 */
+            first_identify_order,          /* 1次鉴定单 */
+            first_identify_result,         /* 1次鉴定结果 */
+            first_identify_url,            /* 1次鉴定URL */
+            secondary_identify_order,      /* 2次鉴定单 */
+            secondary_identify_result,     /* 2次鉴定结果 */
+            secondary_identify_url,        /* 2次鉴定URL */
+            stock_in_doc_id,               /* 入库单编号 */
+            stock_out_doc_id,              /* 出库单编号 */
+            unpacking_time,                /* 拆包登记时间 */
+            print_count,                   /* 打印次数 */
+            duty_rate_customer_service,    /* 客服责任占比 */
+            duty_rate_sales,               /* 采销责任占比 */
+            duty_rate_carrier,             /* 承运商责任占比 */
+            duty_rate_vendor,              /* 供应商责任占比 */
+            binding_time,                  /* 绑定时间 */
+            remark,                        /* 备注 */
+            version,                       /* 数据版本 */
+            create_user,                   /* 创建人 */
+            create_time,                   /* 创建时间 */
+            update_user,                   /* 修改人 */
+            update_time,                   /* 修改时间 */
+            is_delete                      /* 是否删除（1：是；0：否） */
+        ) VALUES (
+            #{companyCode, jdbcType=VARCHAR},                /* 总公司编码 */
+            #{companyName, jdbcType=VARCHAR},                /* 总公司名称 */
+            #{distribCenterCode, jdbcType=VARCHAR},          /* 配送中心编码 */
+            #{distribCenterName, jdbcType=VARCHAR},          /* 配送中心名称 */
+            #{warehouseCode, jdbcType=VARCHAR},              /* 库房编码 */
+            #{warehouseName, jdbcType=VARCHAR},              /* 库房名称 */
+            #{spareCode, jdbcType=VARCHAR},                  /* 备件条码 */
+            #{categoryFirstCode, jdbcType=VARCHAR},          /* 商品一级分类编码 */
+            #{categoryFirstName, jdbcType=VARCHAR},          /* 商品一级分类名称 */
+            #{categorySecondCode, jdbcType=VARCHAR},         /* 商品二级分类编码 */
+            #{categorySecondName, jdbcType=VARCHAR},         /* 商品二级分类名称 */
+            #{categoryThirdCode, jdbcType=VARCHAR},          /* 商品三级分类编码 */
+            #{categoryThirdName, jdbcType=VARCHAR},          /* 商品三级分类名称 */
+            #{brandCode, jdbcType=VARCHAR},                  /* 品牌编码 */
+            #{brandName, jdbcType=VARCHAR},                  /* 品牌名称 */
+            #{vendorCode, jdbcType=VARCHAR},                 /* 供货商编码 */
+            #{vendorName, jdbcType=VARCHAR},                 /* 供货商名称 */
+            #{goodsOwnerCode, jdbcType=VARCHAR},             /* 货主编码 */
+            #{goodsOwnerName, jdbcType=VARCHAR},             /* 货主名称 */
+            #{goodsSku, jdbcType=VARCHAR},                   /* 商品SKU编码 */
+            #{goodsName, jdbcType=VARCHAR},                  /* 商品名称 */
+            #{goodsSn, jdbcType=VARCHAR},                    /* 商品序列号 */
+            #{isSuit, jdbcType=TINYINT},                     /* 是否套装(1:是;0:否) */
+            #{suitId, jdbcType=VARCHAR},                     /* 套装编号（取自基础数据套装商品表） */
+            #{isBinded, jdbcType=TINYINT},                   /* 是否已绑定(0:否,1:是) */
+            #{isMainGoods, jdbcType=TINYINT},                /* 是否主商品（1:是;0:否） */
+            #{isManualUnbundling, jdbcType=TINYINT},         /* 是否手动解绑（1:是;0:否） */
+            #{referSpareCode, jdbcType=VARCHAR},             /* 附商品的主备件条码 */
+            #{goodsPackageCode, jdbcType=VARCHAR},           /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            #{goodsPackageName, jdbcType=VARCHAR},           /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            #{goodsExteriorCode, jdbcType=VARCHAR},          /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            #{goodsExteriorName, jdbcType=VARCHAR},          /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            #{goodsFunctionCode, jdbcType=VARCHAR},          /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            #{goodsFunctionName, jdbcType=VARCHAR},          /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            #{goodsPhaseCode, jdbcType=VARCHAR},             /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            #{goodsPhaseName, jdbcType=VARCHAR},             /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            #{goodsWarehousePrice, jdbcType=DECIMAL},        /* 仓报价 */
+            #{goodsOwnership, jdbcType=VARCHAR},             /* 备件权属(0:京东权属;1:非京东权属) */
+            #{isBrokenScreen, jdbcType=TINYINT},             /* 是否碎屏 (0:完好; 1:已碎屏) */
+            #{isAttachmentComplete, jdbcType=TINYINT},       /* 附件情况（0:不完整; 1:完整） */
+            #{attachmentDesc, jdbcType=VARCHAR},             /* 附件详情 */
+            #{questionDesc, jdbcType=VARCHAR},               /* 问题描述 */
+            #{firstIdentifyOrder, jdbcType=VARCHAR},         /* 1次鉴定单 */
+            #{firstIdentifyResult, jdbcType=VARCHAR},        /* 1次鉴定结果 */
+            #{firstIdentifyUrl, jdbcType=VARCHAR},           /* 1次鉴定URL */
+            #{secondaryIdentifyOrder, jdbcType=VARCHAR},     /* 2次鉴定单 */
+            #{secondaryIdentifyResult, jdbcType=VARCHAR},    /* 2次鉴定结果 */
+            #{secondaryIdentifyUrl, jdbcType=VARCHAR},       /* 2次鉴定URL */
+            #{stockInDocId, jdbcType=VARCHAR},               /* 入库单编号 */
+            #{stockOutDocId, jdbcType=VARCHAR},              /* 出库单编号 */
+            #{unpackingTime, jdbcType=TIMESTAMP},            /* 拆包登记时间 */
+            #{printCount, jdbcType=INTEGER},                 /* 打印次数 */
+            #{dutyRateCustomerService, jdbcType=INTEGER},    /* 客服责任占比 */
+            #{dutyRateSales, jdbcType=INTEGER},              /* 采销责任占比 */
+            #{dutyRateCarrier, jdbcType=INTEGER},            /* 承运商责任占比 */
+            #{dutyRateVendor, jdbcType=INTEGER},             /* 供应商责任占比 */
+            #{bindingTime, jdbcType=TIMESTAMP},              /* 绑定时间 */
+            #{remark, jdbcType=VARCHAR},                     /* 备注 */
+            #{version, jdbcType=VARCHAR},                    /* 数据版本 */
+            #{createUser, jdbcType=VARCHAR},                 /* 创建人 */
+            #{createTime, jdbcType=TIMESTAMP},               /* 创建时间 */
+            #{updateUser, jdbcType=VARCHAR},                 /* 修改人 */
+            #{updateTime, jdbcType=TIMESTAMP},               /* 修改时间 */
+            #{isDelete, jdbcType=TINYINT}                    /* 是否删除（1：是；0：否） */
+        )
+    </insert>
+
+    <!-- 批量插入数据 -->
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO stock_goods (
+            company_code,                  /* 总公司编码 */
+            company_name,                  /* 总公司名称 */
+            distrib_center_code,           /* 配送中心编码 */
+            distrib_center_name,           /* 配送中心名称 */
+            warehouse_code,                /* 库房编码 */
+            warehouse_name,                /* 库房名称 */
+            spare_code,                    /* 备件条码 */
+            category_first_code,           /* 商品一级分类编码 */
+            category_first_name,           /* 商品一级分类名称 */
+            category_second_code,          /* 商品二级分类编码 */
+            category_second_name,          /* 商品二级分类名称 */
+            category_third_code,           /* 商品三级分类编码 */
+            category_third_name,           /* 商品三级分类名称 */
+            brand_code,                    /* 品牌编码 */
+            brand_name,                    /* 品牌名称 */
+            vendor_code,                   /* 供货商编码 */
+            vendor_name,                   /* 供货商名称 */
+            goods_owner_code,              /* 货主编码 */
+            goods_owner_name,              /* 货主名称 */
+            goods_sku,                     /* 商品SKU编码 */
+            goods_name,                    /* 商品名称 */
+            goods_sn,                      /* 商品序列号 */
+            is_suit,                       /* 是否套装(1:是;0:否) */
+            suit_id,                       /* 套装编号（取自基础数据套装商品表） */
+            is_binded,                     /* 是否已绑定(0:否,1:是) */
+            is_main_goods,                 /* 是否主商品（1:是;0:否） */
+            is_manual_unbundling,          /* 是否手动解绑（1:是;0:否） */
+            refer_spare_code,              /* 附商品的主备件条码 */
+            goods_package_code,            /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_package_name,            /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            goods_exterior_code,           /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_exterior_name,           /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            goods_function_code,           /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_function_name,           /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            goods_phase_code,              /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_phase_name,              /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            goods_warehouse_price,         /* 仓报价 */
+            goods_ownership,               /* 备件权属(0:京东权属;1:非京东权属) */
+            is_broken_screen,              /* 是否碎屏 (0:完好; 1:已碎屏) */
+            is_attachment_complete,        /* 附件情况（0:不完整; 1:完整） */
+            attachment_desc,               /* 附件详情 */
+            question_desc,                 /* 问题描述 */
+            first_identify_order,          /* 1次鉴定单 */
+            first_identify_result,         /* 1次鉴定结果 */
+            first_identify_url,            /* 1次鉴定URL */
+            secondary_identify_order,      /* 2次鉴定单 */
+            secondary_identify_result,     /* 2次鉴定结果 */
+            secondary_identify_url,        /* 2次鉴定URL */
+            stock_in_doc_id,               /* 入库单编号 */
+            stock_out_doc_id,              /* 出库单编号 */
+            unpacking_time,                /* 拆包登记时间 */
+            print_count,                   /* 打印次数 */
+            duty_rate_customer_service,    /* 客服责任占比 */
+            duty_rate_sales,               /* 采销责任占比 */
+            duty_rate_carrier,             /* 承运商责任占比 */
+            duty_rate_vendor,              /* 供应商责任占比 */
+            binding_time,                  /* 绑定时间 */
+            remark,                        /* 备注 */
+            version,                       /* 数据版本 */
+            create_user,                   /* 创建人 */
+            create_time,                   /* 创建时间 */
+            update_user,                   /* 修改人 */
+            update_time,                   /* 修改时间 */
+            is_delete                      /* 是否删除（1：是；0：否） */
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            #{item.companyCode, jdbcType=VARCHAR},                /* 总公司编码 */
+            #{item.companyName, jdbcType=VARCHAR},                /* 总公司名称 */
+            #{item.distribCenterCode, jdbcType=VARCHAR},          /* 配送中心编码 */
+            #{item.distribCenterName, jdbcType=VARCHAR},          /* 配送中心名称 */
+            #{item.warehouseCode, jdbcType=VARCHAR},              /* 库房编码 */
+            #{item.warehouseName, jdbcType=VARCHAR},              /* 库房名称 */
+            #{item.spareCode, jdbcType=VARCHAR},                  /* 备件条码 */
+            #{item.categoryFirstCode, jdbcType=VARCHAR},          /* 商品一级分类编码 */
+            #{item.categoryFirstName, jdbcType=VARCHAR},          /* 商品一级分类名称 */
+            #{item.categorySecondCode, jdbcType=VARCHAR},         /* 商品二级分类编码 */
+            #{item.categorySecondName, jdbcType=VARCHAR},         /* 商品二级分类名称 */
+            #{item.categoryThirdCode, jdbcType=VARCHAR},          /* 商品三级分类编码 */
+            #{item.categoryThirdName, jdbcType=VARCHAR},          /* 商品三级分类名称 */
+            #{item.brandCode, jdbcType=VARCHAR},                  /* 品牌编码 */
+            #{item.brandName, jdbcType=VARCHAR},                  /* 品牌名称 */
+            #{item.vendorCode, jdbcType=VARCHAR},                 /* 供货商编码 */
+            #{item.vendorName, jdbcType=VARCHAR},                 /* 供货商名称 */
+            #{item.goodsOwnerCode, jdbcType=VARCHAR},             /* 货主编码 */
+            #{item.goodsOwnerName, jdbcType=VARCHAR},             /* 货主名称 */
+            #{item.goodsSku, jdbcType=VARCHAR},                   /* 商品SKU编码 */
+            #{item.goodsName, jdbcType=VARCHAR},                  /* 商品名称 */
+            #{item.goodsSn, jdbcType=VARCHAR},                    /* 商品序列号 */
+            #{item.isSuit, jdbcType=TINYINT},                     /* 是否套装(1:是;0:否) */
+            #{item.suitId, jdbcType=VARCHAR},                     /* 套装编号（取自基础数据套装商品表） */
+            #{item.isBinded, jdbcType=TINYINT},                   /* 是否已绑定(0:否,1:是) */
+            #{item.isMainGoods, jdbcType=TINYINT},                /* 是否主商品（1:是;0:否） */
+            #{item.isManualUnbundling, jdbcType=TINYINT},         /* 是否手动解绑（1:是;0:否） */
+            #{item.referSpareCode, jdbcType=VARCHAR},             /* 附商品的主备件条码 */
+            #{item.goodsPackageCode, jdbcType=VARCHAR},           /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            #{item.goodsPackageName, jdbcType=VARCHAR},           /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+            #{item.goodsExteriorCode, jdbcType=VARCHAR},          /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            #{item.goodsExteriorName, jdbcType=VARCHAR},          /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+            #{item.goodsFunctionCode, jdbcType=VARCHAR},          /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            #{item.goodsFunctionName, jdbcType=VARCHAR},          /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+            #{item.goodsPhaseCode, jdbcType=VARCHAR},             /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            #{item.goodsPhaseName, jdbcType=VARCHAR},             /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+            #{item.goodsWarehousePrice, jdbcType=DECIMAL},        /* 仓报价 */
+            #{item.goodsOwnership, jdbcType=VARCHAR},             /* 备件权属(0:京东权属;1:非京东权属) */
+            #{item.isBrokenScreen, jdbcType=TINYINT},             /* 是否碎屏 (0:完好; 1:已碎屏) */
+            #{item.isAttachmentComplete, jdbcType=TINYINT},       /* 附件情况（0:不完整; 1:完整） */
+            #{item.attachmentDesc, jdbcType=VARCHAR},             /* 附件详情 */
+            #{item.questionDesc, jdbcType=VARCHAR},               /* 问题描述 */
+            #{item.firstIdentifyOrder, jdbcType=VARCHAR},         /* 1次鉴定单 */
+            #{item.firstIdentifyResult, jdbcType=VARCHAR},        /* 1次鉴定结果 */
+            #{item.firstIdentifyUrl, jdbcType=VARCHAR},           /* 1次鉴定URL */
+            #{item.secondaryIdentifyOrder, jdbcType=VARCHAR},     /* 2次鉴定单 */
+            #{item.secondaryIdentifyResult, jdbcType=VARCHAR},    /* 2次鉴定结果 */
+            #{item.secondaryIdentifyUrl, jdbcType=VARCHAR},       /* 2次鉴定URL */
+            #{item.stockInDocId, jdbcType=VARCHAR},               /* 入库单编号 */
+            #{item.stockOutDocId, jdbcType=VARCHAR},              /* 出库单编号 */
+            #{item.unpackingTime, jdbcType=TIMESTAMP},            /* 拆包登记时间 */
+            #{item.printCount, jdbcType=INTEGER},                 /* 打印次数 */
+            #{item.dutyRateCustomerService, jdbcType=INTEGER},    /* 客服责任占比 */
+            #{item.dutyRateSales, jdbcType=INTEGER},              /* 采销责任占比 */
+            #{item.dutyRateCarrier, jdbcType=INTEGER},            /* 承运商责任占比 */
+            #{item.dutyRateVendor, jdbcType=INTEGER},             /* 供应商责任占比 */
+            #{item.bindingTime, jdbcType=TIMESTAMP},              /* 绑定时间 */
+            #{item.remark, jdbcType=VARCHAR},                     /* 备注 */
+            #{item.version, jdbcType=VARCHAR},                    /* 数据版本 */
+            #{item.createUser, jdbcType=VARCHAR},                 /* 创建人 */
+            #{item.createTime, jdbcType=TIMESTAMP},               /* 创建时间 */
+            #{item.updateUser, jdbcType=VARCHAR},                 /* 修改人 */
+            #{item.updateTime, jdbcType=TIMESTAMP},               /* 修改时间 */
+            #{item.isDelete, jdbcType=TINYINT}                    /* 是否删除（1：是；0：否） */
+        )
+        </foreach>
+    </insert>
+
+    <!-- 按主键更新 -->
+    <update id="updateByPrimaryKey" parameterType="java.util.Map">
+        <if test="_parameter != null">
+            UPDATE stock_goods
+            <set>
+                <if test="companyCode != null and companyCode != ''">
+                    company_code = #{companyCode, jdbcType=VARCHAR},    /* 总公司编码 */
+                </if>
+                <if test="companyName != null and companyName != ''">
+                    company_name = #{companyName, jdbcType=VARCHAR},    /* 总公司名称 */
+                </if>
+                <if test="distribCenterCode != null and distribCenterCode != ''">
+                    distrib_center_code = #{distribCenterCode, jdbcType=VARCHAR},    /* 配送中心编码 */
+                </if>
+                <if test="distribCenterName != null and distribCenterName != ''">
+                    distrib_center_name = #{distribCenterName, jdbcType=VARCHAR},    /* 配送中心名称 */
+                </if>
+                <if test="warehouseCode != null and warehouseCode != ''">
+                    warehouse_code = #{warehouseCode, jdbcType=VARCHAR},    /* 库房编码 */
+                </if>
+                <if test="warehouseName != null and warehouseName != ''">
+                    warehouse_name = #{warehouseName, jdbcType=VARCHAR},    /* 库房名称 */
+                </if>
+                <if test="spareCode != null and spareCode != ''">
+                    spare_code = #{spareCode, jdbcType=VARCHAR},    /* 备件条码 */
+                </if>
+                <if test="categoryFirstCode != null and categoryFirstCode != ''">
+                    category_first_code = #{categoryFirstCode, jdbcType=VARCHAR},    /* 商品一级分类编码 */
+                </if>
+                <if test="categoryFirstName != null and categoryFirstName != ''">
+                    category_first_name = #{categoryFirstName, jdbcType=VARCHAR},    /* 商品一级分类名称 */
+                </if>
+                <if test="categorySecondCode != null and categorySecondCode != ''">
+                    category_second_code = #{categorySecondCode, jdbcType=VARCHAR},    /* 商品二级分类编码 */
+                </if>
+                <if test="categorySecondName != null and categorySecondName != ''">
+                    category_second_name = #{categorySecondName, jdbcType=VARCHAR},    /* 商品二级分类名称 */
+                </if>
+                <if test="categoryThirdCode != null and categoryThirdCode != ''">
+                    category_third_code = #{categoryThirdCode, jdbcType=VARCHAR},    /* 商品三级分类编码 */
+                </if>
+                <if test="categoryThirdName != null and categoryThirdName != ''">
+                    category_third_name = #{categoryThirdName, jdbcType=VARCHAR},    /* 商品三级分类名称 */
+                </if>
+                <if test="brandCode != null and brandCode != ''">
+                    brand_code = #{brandCode, jdbcType=VARCHAR},    /* 品牌编码 */
+                </if>
+                <if test="brandName != null and brandName != ''">
+                    brand_name = #{brandName, jdbcType=VARCHAR},    /* 品牌名称 */
+                </if>
+                <if test="vendorCode != null and vendorCode != ''">
+                    vendor_code = #{vendorCode, jdbcType=VARCHAR},    /* 供货商编码 */
+                </if>
+                <if test="vendorName != null and vendorName != ''">
+                    vendor_name = #{vendorName, jdbcType=VARCHAR},    /* 供货商名称 */
+                </if>
+                <if test="goodsOwnerCode != null and goodsOwnerCode != ''">
+                    goods_owner_code = #{goodsOwnerCode, jdbcType=VARCHAR},    /* 货主编码 */
+                </if>
+                <if test="goodsOwnerName != null and goodsOwnerName != ''">
+                    goods_owner_name = #{goodsOwnerName, jdbcType=VARCHAR},    /* 货主名称 */
+                </if>
+                <if test="goodsSku != null and goodsSku != ''">
+                    goods_sku = #{goodsSku, jdbcType=VARCHAR},    /* 商品SKU编码 */
+                </if>
+                <if test="goodsName != null and goodsName != ''">
+                    goods_name = #{goodsName, jdbcType=VARCHAR},    /* 商品名称 */
+                </if>
+                <if test="goodsSn != null and goodsSn != ''">
+                    goods_sn = #{goodsSn, jdbcType=VARCHAR},    /* 商品序列号 */
+                </if>
+                <if test="isSuit != null">
+                    is_suit = #{isSuit, jdbcType=TINYINT},    /* 是否套装(1:是;0:否) */
+                </if>
+                <if test="suitId != null and suitId != ''">
+                    suit_id = #{suitId, jdbcType=VARCHAR},    /* 套装编号（取自基础数据套装商品表） */
+                </if>
+                <if test="isBinded != null">
+                    is_binded = #{isBinded, jdbcType=TINYINT},    /* 是否已绑定(0:否,1:是) */
+                </if>
+                <if test="isMainGoods != null">
+                    is_main_goods = #{isMainGoods, jdbcType=TINYINT},    /* 是否主商品（1:是;0:否） */
+                </if>
+                <if test="isManualUnbundling != null">
+                    is_manual_unbundling = #{isManualUnbundling, jdbcType=TINYINT},    /* 是否手动解绑（1:是;0:否） */
+                </if>
+                <if test="referSpareCode != null and referSpareCode != ''">
+                    refer_spare_code = #{referSpareCode, jdbcType=VARCHAR},    /* 附商品的主备件条码 */
+                </if>
+                <if test="goodsPackageCode != null and goodsPackageCode != ''">
+                    goods_package_code = #{goodsPackageCode, jdbcType=VARCHAR},    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+                </if>
+                <if test="goodsPackageName != null and goodsPackageName != ''">
+                    goods_package_name = #{goodsPackageName, jdbcType=VARCHAR},    /* 产品包装编码( 0:无包装; 1:有非新; 2:新) */
+                </if>
+                <if test="goodsExteriorCode != null and goodsExteriorCode != ''">
+                    goods_exterior_code = #{goodsExteriorCode, jdbcType=VARCHAR},    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+                </if>
+                <if test="goodsExteriorName != null and goodsExteriorName != ''">
+                    goods_exterior_name = #{goodsExteriorName, jdbcType=VARCHAR},    /* 商品外观编码（ 0:严重损; 1:轻微损; 2:新） */
+                </if>
+                <if test="goodsFunctionCode != null and goodsFunctionCode != ''">
+                    goods_function_code = #{goodsFunctionCode, jdbcType=VARCHAR},    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+                </if>
+                <if test="goodsFunctionName != null and goodsFunctionName != ''">
+                    goods_function_name = #{goodsFunctionName, jdbcType=VARCHAR},    /* 商品功能编码 （0:坏; 1:好; 2:待检测） */
+                </if>
+                <if test="goodsPhaseCode != null and goodsPhaseCode != ''">
+                    goods_phase_code = #{goodsPhaseCode, jdbcType=VARCHAR},    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+                </if>
+                <if test="goodsPhaseName != null and goodsPhaseName != ''">
+                    goods_phase_name = #{goodsPhaseName, jdbcType=VARCHAR},    /* 商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品） */
+                </if>
+                <if test="goodsWarehousePrice != null">
+                    goods_warehouse_price = #{goodsWarehousePrice, jdbcType=DECIMAL},    /* 仓报价 */
+                </if>
+                <if test="goodsOwnership != null and goodsOwnership != ''">
+                    goods_ownership = #{goodsOwnership, jdbcType=VARCHAR},    /* 备件权属(0:京东权属;1:非京东权属) */
+                </if>
+                <if test="isBrokenScreen != null">
+                    is_broken_screen = #{isBrokenScreen, jdbcType=TINYINT},    /* 是否碎屏 (0:完好; 1:已碎屏) */
+                </if>
+                <if test="isAttachmentComplete != null">
+                    is_attachment_complete = #{isAttachmentComplete, jdbcType=TINYINT},    /* 附件情况（0:不完整; 1:完整） */
+                </if>
+                <if test="attachmentDesc != null and attachmentDesc != ''">
+                    attachment_desc = #{attachmentDesc, jdbcType=VARCHAR},    /* 附件详情 */
+                </if>
+                <if test="questionDesc != null and questionDesc != ''">
+                    question_desc = #{questionDesc, jdbcType=VARCHAR},    /* 问题描述 */
+                </if>
+                <if test="firstIdentifyOrder != null and firstIdentifyOrder != ''">
+                    first_identify_order = #{firstIdentifyOrder, jdbcType=VARCHAR},    /* 1次鉴定单 */
+                </if>
+                <if test="firstIdentifyResult != null and firstIdentifyResult != ''">
+                    first_identify_result = #{firstIdentifyResult, jdbcType=VARCHAR},    /* 1次鉴定结果 */
+                </if>
+                <if test="firstIdentifyUrl != null and firstIdentifyUrl != ''">
+                    first_identify_url = #{firstIdentifyUrl, jdbcType=VARCHAR},    /* 1次鉴定URL */
+                </if>
+                <if test="secondaryIdentifyOrder != null and secondaryIdentifyOrder != ''">
+                    secondary_identify_order = #{secondaryIdentifyOrder, jdbcType=VARCHAR},    /* 2次鉴定单 */
+                </if>
+                <if test="secondaryIdentifyResult != null and secondaryIdentifyResult != ''">
+                    secondary_identify_result = #{secondaryIdentifyResult, jdbcType=VARCHAR},    /* 2次鉴定结果 */
+                </if>
+                <if test="secondaryIdentifyUrl != null and secondaryIdentifyUrl != ''">
+                    secondary_identify_url = #{secondaryIdentifyUrl, jdbcType=VARCHAR},    /* 2次鉴定URL */
+                </if>
+                <if test="stockInDocId != null and stockInDocId != ''">
+                    stock_in_doc_id = #{stockInDocId, jdbcType=VARCHAR},    /* 入库单编号 */
+                </if>
+                <if test="stockOutDocId != null and stockOutDocId != ''">
+                    stock_out_doc_id = #{stockOutDocId, jdbcType=VARCHAR},    /* 出库单编号 */
+                </if>
+                <if test="unpackingTime != null">
+                    unpacking_time = #{unpackingTime, jdbcType=TIMESTAMP},    /* 拆包登记时间 */
+                </if>
+                <if test="printCount != null">
+                    print_count = #{printCount, jdbcType=INTEGER},    /* 打印次数 */
+                </if>
+                <if test="dutyRateCustomerService != null">
+                    duty_rate_customer_service = #{dutyRateCustomerService, jdbcType=INTEGER},    /* 客服责任占比 */
+                </if>
+                <if test="dutyRateSales != null">
+                    duty_rate_sales = #{dutyRateSales, jdbcType=INTEGER},    /* 采销责任占比 */
+                </if>
+                <if test="dutyRateCarrier != null">
+                    duty_rate_carrier = #{dutyRateCarrier, jdbcType=INTEGER},    /* 承运商责任占比 */
+                </if>
+                <if test="dutyRateVendor != null">
+                    duty_rate_vendor = #{dutyRateVendor, jdbcType=INTEGER},    /* 供应商责任占比 */
+                </if>
+                <if test="bindingTime != null">
+                    binding_time = #{bindingTime, jdbcType=TIMESTAMP},    /* 绑定时间 */
+                </if>
+                <if test="remark != null and remark != ''">
+                    remark = #{remark, jdbcType=VARCHAR},    /* 备注 */
+                </if>
+                <if test="version != null and version != ''">
+                    version = #{version, jdbcType=VARCHAR},    /* 数据版本 */
+                </if>
+                <if test="updateUser != null and updateUser != ''">
+                    update_user = #{updateUser, jdbcType=VARCHAR},    /* 修改人 */
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime, jdbcType=TIMESTAMP}    /* 修改时间 */
+                </if>
+            </set>
+            <where>
+                id = #{id, jdbcType=BIGINT}	/* 主键 */
+                AND is_delete = 0		/* 是否删除(1:是;0:否) */
+                <if test="_version != null and _version != ''">
+                    AND version = #{_version, jdbcType=VARCHAR}    /* 数据版本 */
+                </if>
+            </where>
+        </if>
+    </update>
+
+    <!-- 按主键删除 -->
+    <update id="deleteByPrimaryKey" parameterType="com.jd.las.spare.domain.stock.StockGoods">
+        <if test="_parameter != null">
+            UPDATE stock_goods
+            <set>
+                is_delete = 1,    /* 是否删除(1:是;0:否) */
+                update_user = #{updateUser, jdbcType=VARCHAR},	/* 修改人 */
+                update_time = #{updateTime, jdbcType=TIMESTAMP}	/* 修改时间 */
+            </set>
+            <where>
+                id = #{id, jdbcType=BIGINT}	/* 主键 */
+                AND is_delete = 0		/* 是否删除(1:是;0:否) */
+            </where>
+        </if>
+    </update>
+
+    <!-- 按主键批量删除 -->
+    <update id="batchDeleteByPrimaryKey" parameterType="java.util.Map">
+        <if test="_parameter != null">
+            UPDATE stock_goods
+            <set>
+                is_delete = 1,    /* 是否删除(1:是;0:否) */
+                update_user = #{updateUser, jdbcType=VARCHAR},	/* 修改人 */
+                update_time = #{updateTime, jdbcType=TIMESTAMP}	/* 修改时间 */
+            </set>
+            <where>
+                id in    /* 主键集合 */
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id, jdbcType=BIGINT}
+                </foreach>
+                AND is_delete = 0    /* 是否删除(1:是;0:否) */
+            </where>
+        </if>
+    </update>
+
+    <!-- 按主键批量物理删除，慎用 -->
+    <delete id="batchDeleteByPrimaryKeyPhysically" parameterType="java.util.List">
+        <if test="_parameter != null">
+            DELETE FROM stock_goods
+            <where>
+                id in	/* 主键集合 */
+                <foreach collection="list" item="id" open="(" separator="," close=")">
+                    #{id, jdbcType=BIGINT}
+                </foreach>
+            </where>
+        </if>
+    </delete>
+
+    <!-- 查询所有记录 -->
+    <select id="selectAll" resultMap="resultMap">
+        SELECT
+            <include refid="queryColumns"/>
+        FROM
+            stock_goods
+        <where>
+            is_delete = 0    /* 是否删除(1:是;0:否) */
+        </where>
+    </select>
+
+    <!-- 按主键查询 -->
+    <select id="selectByPrimaryKey" resultMap="resultMap" parameterType="java.lang.Long">
+        SELECT
+            <include refid="queryColumns"/>
+        FROM
+            stock_goods
+        <where>
+            id = #{id, jdbcType=BIGINT}	/* 主键 */
+            AND is_delete = 0			/* 是否删除(1:是;0:否) */
+        </where>
+    </select>
+
+    <!-- 按主键集合查询 -->
+    <select id="selectByPrimaryKeys" resultMap="resultMap" parameterType="java.util.List">
+        SELECT
+            <include refid="queryColumns"/>
+        FROM
+            stock_goods
+        <where>
+            id in	/* 主键集合 */
+            <foreach collection="list" item="id" open="(" separator="," close=")">
+                #{id, jdbcType=BIGINT}
+            </foreach>
+            AND is_delete = 0	/* 是否删除(1:是;0:否) */
+        </where>
+    </select>
+
+    <!-- 按条件查询 -->
+    <select id="selectByCondition" resultMap="resultMap" parameterType="java.util.Map">
+        SELECT
+            <include refid="queryColumns"/>
+        FROM
+            stock_goods
+        <include refid="queryClause"/>
+        <include refid="sortClause"/>
+        <include refid="pageClause"/>
+    </select>
+
+    <!-- 按条件统计记录数 -->
+    <select id="countByCondition" resultType="java.lang.Long" parameterType="java.util.Map">
+        SELECT
+            COUNT(1)
+        FROM
+            stock_goods
+        <include refid="queryClause"/>
+    </select>
+
+</mapper>

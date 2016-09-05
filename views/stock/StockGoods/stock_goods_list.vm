@@ -1,0 +1,469 @@
+########################################################################
+## 库存商品表列表页面
+##author：
+########################################################################
+#set($layout = "common/layout/default.vm")
+
+<script src="#springUrl('')/js/stock/StockGoods/stock_goods_list.js"></script>
+
+########################################################################
+## 导航区
+########################################################################
+<div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <span class="grey"> 首页</span>
+        </li>
+	   </ul>
+</div><!-- /.breadcrumbs -->
+########################################################################
+## 查询区与数据列表区
+########################################################################
+<div class="page-content">
+    <!-- 查询条件区域 -->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5 class="widget-title"><i class="ace-icon fa fa-search"></i> 查询条件</h5>
+            <div class="widget-toolbar">
+                </a> <a href="#" data-action="collapse"> <i class="ace-icon fa fa-chevron-up"></i></a>
+            </div>
+        </div><!-- /.widget-header -->
+        <div class="widget-body">
+            <div class="widget-main">
+                <form id="searchForm" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">主键</label>
+                                <input class="form-control form-cnd" id="id" name="id" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">总公司编码</label>
+                                <input class="form-control form-cnd" id="companyCode" name="companyCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">总公司名称</label>
+                                <input class="form-control form-cnd" id="companyName" name="companyName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">配送中心编码</label>
+                                <input class="form-control form-cnd" id="distribCenterCode" name="distribCenterCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">配送中心名称</label>
+                                <input class="form-control form-cnd" id="distribCenterName" name="distribCenterName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">库房编码</label>
+                                <input class="form-control form-cnd" id="warehouseCode" name="warehouseCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">库房名称</label>
+                                <input class="form-control form-cnd" id="warehouseName" name="warehouseName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">备件条码</label>
+                                <input class="form-control form-cnd" id="spareCode" name="spareCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品一级分类编码</label>
+                                <input class="form-control form-cnd" id="categoryFirstCode" name="categoryFirstCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品一级分类名称</label>
+                                <input class="form-control form-cnd" id="categoryFirstName" name="categoryFirstName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品二级分类编码</label>
+                                <input class="form-control form-cnd" id="categorySecondCode" name="categorySecondCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品二级分类名称</label>
+                                <input class="form-control form-cnd" id="categorySecondName" name="categorySecondName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品三级分类编码</label>
+                                <input class="form-control form-cnd" id="categoryThirdCode" name="categoryThirdCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品三级分类名称</label>
+                                <input class="form-control form-cnd" id="categoryThirdName" name="categoryThirdName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">品牌编码</label>
+                                <input class="form-control form-cnd" id="brandCode" name="brandCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">品牌名称</label>
+                                <input class="form-control form-cnd" id="brandName" name="brandName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">供货商编码</label>
+                                <input class="form-control form-cnd" id="vendorCode" name="vendorCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">供货商名称</label>
+                                <input class="form-control form-cnd" id="vendorName" name="vendorName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">货主编码</label>
+                                <input class="form-control form-cnd" id="goodsOwnerCode" name="goodsOwnerCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">货主名称</label>
+                                <input class="form-control form-cnd" id="goodsOwnerName" name="goodsOwnerName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品SKU编码</label>
+                                <input class="form-control form-cnd" id="goodsSku" name="goodsSku" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品名称</label>
+                                <input class="form-control form-cnd" id="goodsName" name="goodsName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品序列号</label>
+                                <input class="form-control form-cnd" id="goodsSn" name="goodsSn" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否套装(1:是;0:否)</label>
+                                <input class="form-control form-cnd" id="isSuit" name="isSuit" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">套装编号（取自基础数据套装商品表）</label>
+                                <input class="form-control form-cnd" id="suitId" name="suitId" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否已绑定(0:否,1:是)</label>
+                                <input class="form-control form-cnd" id="isBinded" name="isBinded" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否主商品（1:是;0:否）</label>
+                                <input class="form-control form-cnd" id="isMainGoods" name="isMainGoods" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否手动解绑（1:是;0:否）</label>
+                                <input class="form-control form-cnd" id="isManualUnbundling" name="isManualUnbundling" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">附商品的主备件条码</label>
+                                <input class="form-control form-cnd" id="referSpareCode" name="referSpareCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">产品包装编码( 0:无包装; 1:有非新; 2:新)</label>
+                                <input class="form-control form-cnd" id="goodsPackageCode" name="goodsPackageCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">产品包装编码( 0:无包装; 1:有非新; 2:新)</label>
+                                <input class="form-control form-cnd" id="goodsPackageName" name="goodsPackageName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品外观编码（ 0:严重损; 1:轻微损; 2:新）</label>
+                                <input class="form-control form-cnd" id="goodsExteriorCode" name="goodsExteriorCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品外观编码（ 0:严重损; 1:轻微损; 2:新）</label>
+                                <input class="form-control form-cnd" id="goodsExteriorName" name="goodsExteriorName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品功能编码 （0:坏; 1:好; 2:待检测）</label>
+                                <input class="form-control form-cnd" id="goodsFunctionCode" name="goodsFunctionCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品功能编码 （0:坏; 1:好; 2:待检测）</label>
+                                <input class="form-control form-cnd" id="goodsFunctionName" name="goodsFunctionName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）</label>
+                                <input class="form-control form-cnd" id="goodsPhaseCode" name="goodsPhaseCode" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）</label>
+                                <input class="form-control form-cnd" id="goodsPhaseName" name="goodsPhaseName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">仓报价</label>
+                                <input class="form-control form-cnd" id="goodsWarehousePrice" name="goodsWarehousePrice" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">备件权属(0:京东权属;1:非京东权属)</label>
+                                <input class="form-control form-cnd" id="goodsOwnership" name="goodsOwnership" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否碎屏 (0:完好; 1:已碎屏)</label>
+                                <input class="form-control form-cnd" id="isBrokenScreen" name="isBrokenScreen" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">附件情况（0:不完整; 1:完整）</label>
+                                <input class="form-control form-cnd" id="isAttachmentComplete" name="isAttachmentComplete" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">附件详情</label>
+                                <input class="form-control form-cnd" id="attachmentDesc" name="attachmentDesc" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">问题描述</label>
+                                <input class="form-control form-cnd" id="questionDesc" name="questionDesc" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">1次鉴定单</label>
+                                <input class="form-control form-cnd" id="firstIdentifyOrder" name="firstIdentifyOrder" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">1次鉴定结果</label>
+                                <input class="form-control form-cnd" id="firstIdentifyResult" name="firstIdentifyResult" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">1次鉴定URL</label>
+                                <input class="form-control form-cnd" id="firstIdentifyUrl" name="firstIdentifyUrl" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">2次鉴定单</label>
+                                <input class="form-control form-cnd" id="secondaryIdentifyOrder" name="secondaryIdentifyOrder" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">2次鉴定结果</label>
+                                <input class="form-control form-cnd" id="secondaryIdentifyResult" name="secondaryIdentifyResult" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">2次鉴定URL</label>
+                                <input class="form-control form-cnd" id="secondaryIdentifyUrl" name="secondaryIdentifyUrl" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">入库单编号</label>
+                                <input class="form-control form-cnd" id="stockInDocId" name="stockInDocId" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">出库单编号</label>
+                                <input class="form-control form-cnd" id="stockOutDocId" name="stockOutDocId" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">拆包登记时间</label>
+                                <input class="form-control form-cnd" id="unpackingTime" name="unpackingTime" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">打印次数</label>
+                                <input class="form-control form-cnd" id="printCount" name="printCount" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">客服责任占比</label>
+                                <input class="form-control form-cnd" id="dutyRateCustomerService" name="dutyRateCustomerService" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">采销责任占比</label>
+                                <input class="form-control form-cnd" id="dutyRateSales" name="dutyRateSales" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">承运商责任占比</label>
+                                <input class="form-control form-cnd" id="dutyRateCarrier" name="dutyRateCarrier" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">供应商责任占比</label>
+                                <input class="form-control form-cnd" id="dutyRateVendor" name="dutyRateVendor" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">绑定时间</label>
+                                <input class="form-control form-cnd" id="bindingTime" name="bindingTime" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">备注</label>
+                                <input class="form-control form-cnd" id="remark" name="remark" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">数据版本</label>
+                                <input class="form-control form-cnd" id="version" name="version" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">创建人</label>
+                                <input class="form-control form-cnd" id="createUser" name="createUser" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">创建时间</label>
+                                <input class="form-control form-cnd" id="createTime" name="createTime" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">修改人</label>
+                                <input class="form-control form-cnd" id="updateUser" name="updateUser" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">修改时间</label>
+                                <input class="form-control form-cnd" id="updateTime" name="updateTime" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">是否删除（1：是；0：否）</label>
+                                <input class="form-control form-cnd" id="isDelete" name="isDelete" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <label for="code" class="input-group-addon">时间戳</label>
+                                <input class="form-control form-cnd" id="ts" name="ts" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /.widget-main -->
+            <div class="widget-toolbox padding-8 clearfix">
+                <button class="button button-rounded button-primary button-small" id="btnQuery">
+                    <i class="ace-icon fa fa-search"></i>
+                    <span class="bigger-110">查询</span>
+                </button>
+                <button class="button button-rounded button-primary button-small" id="btnReset">
+                    <i class="ace-icon fa fa-eraser"></i>
+                    <span class="bigger-110">清空</span>
+                </button>
+            </div>
+        </div><!-- /.widget-body -->
+    </div><!-- /.widget-box -->
+
+    <!-- 数据列表区域 -->
+    <div class="widget-box">
+        <div class="widget-header">
+            <h5 class="widget-title"><i class="fa fa-table" aria-hidden="true"></i> 数据列表 </h5>
+            <div class="widget-toolbar">
+                </a> <a href="#" data-action="collapse"> <i class="ace-icon fa fa-chevron-up"></i></a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-toolbox padding-8 clearfix">
+                <a class="button button-primary button-rounded button-small" href="#springUrl('')/web/stock/stockgoods/addPage">
+                   <i class="ace-icon fa fa-plus"></i>
+                   <span class="bigger-110">新增</span>
+                </a>
+            </div><!-- /.widget-toolbox -->
+            <div class="jqgrid-container">
+                <table id="gridTable"></table>
+                <div id="gridPager"></div>
+            </div>
+        </div><!-- /.widget-body -->
+    </div><!-- /.widget-box -->
+</div><!-- /.page-content -->

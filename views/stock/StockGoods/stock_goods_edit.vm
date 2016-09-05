@@ -1,0 +1,518 @@
+########################################################################
+## 修改页面
+##author：
+########################################################################
+#set($layout = "common/layout/default.vm") 
+
+<script src="#springUrl('')/js/stock/StockGoods/stock_goods_edit.js"></script>
+########################################################################
+## 导航区
+########################################################################
+<div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <span class="grey">数据类型？</span>
+        </li>
+        <li>
+            <span class="grey">库存商品表</span>
+        </li>
+        <li class="active">
+            <span class="grey"> 修改 </span>
+        </li>
+    </ul>
+	   <div class="pull-right">
+		   <a class="button button-rounded button-default button-small" href="#springUrl('')/web/stock/stockgoods/listPage">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            <span class="bigger-110">返回</span>
+        </a>
+    </div>
+</div>
+########################################################################
+## 维护表单
+########################################################################
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            数据类型？
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+               修改库存商品表
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+                <div class="widget-main">
+                    <form id="editForm" class="form-horizontal" method="post" action="#springUrl('')/web/stock/stockgoods/update">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">主键</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="id" name="id" class="form-control" value="$!{stockGoods.id}" data-rule="主键:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">总公司编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="companyCode" name="companyCode" class="form-control" value="$!{stockGoods.companyCode}" data-rule="总公司编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">总公司名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="companyName" name="companyName" class="form-control" value="$!{stockGoods.companyName}" data-rule="总公司名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">配送中心编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="distribCenterCode" name="distribCenterCode" class="form-control" value="$!{stockGoods.distribCenterCode}" data-rule="配送中心编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">配送中心名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="distribCenterName" name="distribCenterName" class="form-control" value="$!{stockGoods.distribCenterName}" data-rule="配送中心名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">库房编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="warehouseCode" name="warehouseCode" class="form-control" value="$!{stockGoods.warehouseCode}" data-rule="库房编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">库房名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="warehouseName" name="warehouseName" class="form-control" value="$!{stockGoods.warehouseName}" data-rule="库房名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">备件条码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="spareCode" name="spareCode" class="form-control" value="$!{stockGoods.spareCode}" data-rule="备件条码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品一级分类编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categoryFirstCode" name="categoryFirstCode" class="form-control" value="$!{stockGoods.categoryFirstCode}" data-rule="商品一级分类编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品一级分类名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categoryFirstName" name="categoryFirstName" class="form-control" value="$!{stockGoods.categoryFirstName}" data-rule="商品一级分类名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品二级分类编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categorySecondCode" name="categorySecondCode" class="form-control" value="$!{stockGoods.categorySecondCode}" data-rule="商品二级分类编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品二级分类名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categorySecondName" name="categorySecondName" class="form-control" value="$!{stockGoods.categorySecondName}" data-rule="商品二级分类名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品三级分类编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categoryThirdCode" name="categoryThirdCode" class="form-control" value="$!{stockGoods.categoryThirdCode}" data-rule="商品三级分类编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品三级分类名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="categoryThirdName" name="categoryThirdName" class="form-control" value="$!{stockGoods.categoryThirdName}" data-rule="商品三级分类名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">品牌编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="brandCode" name="brandCode" class="form-control" value="$!{stockGoods.brandCode}" data-rule="品牌编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">品牌名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="brandName" name="brandName" class="form-control" value="$!{stockGoods.brandName}" data-rule="品牌名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">供货商编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="vendorCode" name="vendorCode" class="form-control" value="$!{stockGoods.vendorCode}" data-rule="供货商编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">供货商名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="vendorName" name="vendorName" class="form-control" value="$!{stockGoods.vendorName}" data-rule="供货商名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">货主编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsOwnerCode" name="goodsOwnerCode" class="form-control" value="$!{stockGoods.goodsOwnerCode}" data-rule="货主编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">货主名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsOwnerName" name="goodsOwnerName" class="form-control" value="$!{stockGoods.goodsOwnerName}" data-rule="货主名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品SKU编码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsSku" name="goodsSku" class="form-control" value="$!{stockGoods.goodsSku}" data-rule="商品SKU编码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品名称</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsName" name="goodsName" class="form-control" value="$!{stockGoods.goodsName}" data-rule="商品名称:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品序列号</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsSn" name="goodsSn" class="form-control" value="$!{stockGoods.goodsSn}" data-rule="商品序列号:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否套装(1:是;0:否)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isSuit" name="isSuit" class="form-control" value="$!{stockGoods.isSuit}" data-rule="是否套装(1:是;0:否):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">套装编号（取自基础数据套装商品表）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="suitId" name="suitId" class="form-control" value="$!{stockGoods.suitId}" data-rule="套装编号（取自基础数据套装商品表）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否已绑定(0:否,1:是)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isBinded" name="isBinded" class="form-control" value="$!{stockGoods.isBinded}" data-rule="是否已绑定(0:否,1:是):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否主商品（1:是;0:否）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isMainGoods" name="isMainGoods" class="form-control" value="$!{stockGoods.isMainGoods}" data-rule="是否主商品（1:是;0:否）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否手动解绑（1:是;0:否）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isManualUnbundling" name="isManualUnbundling" class="form-control" value="$!{stockGoods.isManualUnbundling}" data-rule="是否手动解绑（1:是;0:否）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">附商品的主备件条码</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="referSpareCode" name="referSpareCode" class="form-control" value="$!{stockGoods.referSpareCode}" data-rule="附商品的主备件条码:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">产品包装编码( 0:无包装; 1:有非新; 2:新)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsPackageCode" name="goodsPackageCode" class="form-control" value="$!{stockGoods.goodsPackageCode}" data-rule="产品包装编码( 0:无包装; 1:有非新; 2:新):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">产品包装编码( 0:无包装; 1:有非新; 2:新)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsPackageName" name="goodsPackageName" class="form-control" value="$!{stockGoods.goodsPackageName}" data-rule="产品包装编码( 0:无包装; 1:有非新; 2:新):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品外观编码（ 0:严重损; 1:轻微损; 2:新）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsExteriorCode" name="goodsExteriorCode" class="form-control" value="$!{stockGoods.goodsExteriorCode}" data-rule="商品外观编码（ 0:严重损; 1:轻微损; 2:新）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品外观编码（ 0:严重损; 1:轻微损; 2:新）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsExteriorName" name="goodsExteriorName" class="form-control" value="$!{stockGoods.goodsExteriorName}" data-rule="商品外观编码（ 0:严重损; 1:轻微损; 2:新）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品功能编码 （0:坏; 1:好; 2:待检测）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsFunctionCode" name="goodsFunctionCode" class="form-control" value="$!{stockGoods.goodsFunctionCode}" data-rule="商品功能编码 （0:坏; 1:好; 2:待检测）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品功能编码 （0:坏; 1:好; 2:待检测）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsFunctionName" name="goodsFunctionName" class="form-control" value="$!{stockGoods.goodsFunctionName}" data-rule="商品功能编码 （0:坏; 1:好; 2:待检测）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsPhaseCode" name="goodsPhaseCode" class="form-control" value="$!{stockGoods.goodsPhaseCode}" data-rule="商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsPhaseName" name="goodsPhaseName" class="form-control" value="$!{stockGoods.goodsPhaseName}" data-rule="商品品相编码 （0:废品; 1:坏品; 2:良品; 3:新品）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">仓报价</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsWarehousePrice" name="goodsWarehousePrice" class="form-control" value="$!{stockGoods.goodsWarehousePrice}" data-rule="仓报价:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">备件权属(0:京东权属;1:非京东权属)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="goodsOwnership" name="goodsOwnership" class="form-control" value="$!{stockGoods.goodsOwnership}" data-rule="备件权属(0:京东权属;1:非京东权属):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否碎屏 (0:完好; 1:已碎屏)</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isBrokenScreen" name="isBrokenScreen" class="form-control" value="$!{stockGoods.isBrokenScreen}" data-rule="是否碎屏 (0:完好; 1:已碎屏):required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">附件情况（0:不完整; 1:完整）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isAttachmentComplete" name="isAttachmentComplete" class="form-control" value="$!{stockGoods.isAttachmentComplete}" data-rule="附件情况（0:不完整; 1:完整）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">附件详情</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="attachmentDesc" name="attachmentDesc" class="form-control" value="$!{stockGoods.attachmentDesc}" data-rule="附件详情:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">问题描述</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="questionDesc" name="questionDesc" class="form-control" value="$!{stockGoods.questionDesc}" data-rule="问题描述:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">1次鉴定单</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="firstIdentifyOrder" name="firstIdentifyOrder" class="form-control" value="$!{stockGoods.firstIdentifyOrder}" data-rule="1次鉴定单:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">1次鉴定结果</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="firstIdentifyResult" name="firstIdentifyResult" class="form-control" value="$!{stockGoods.firstIdentifyResult}" data-rule="1次鉴定结果:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">1次鉴定URL</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="firstIdentifyUrl" name="firstIdentifyUrl" class="form-control" value="$!{stockGoods.firstIdentifyUrl}" data-rule="1次鉴定URL:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">2次鉴定单</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="secondaryIdentifyOrder" name="secondaryIdentifyOrder" class="form-control" value="$!{stockGoods.secondaryIdentifyOrder}" data-rule="2次鉴定单:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">2次鉴定结果</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="secondaryIdentifyResult" name="secondaryIdentifyResult" class="form-control" value="$!{stockGoods.secondaryIdentifyResult}" data-rule="2次鉴定结果:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">2次鉴定URL</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="secondaryIdentifyUrl" name="secondaryIdentifyUrl" class="form-control" value="$!{stockGoods.secondaryIdentifyUrl}" data-rule="2次鉴定URL:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">入库单编号</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="stockInDocId" name="stockInDocId" class="form-control" value="$!{stockGoods.stockInDocId}" data-rule="入库单编号:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">出库单编号</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="stockOutDocId" name="stockOutDocId" class="form-control" value="$!{stockGoods.stockOutDocId}" data-rule="出库单编号:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">拆包登记时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="unpackingTime" name="unpackingTime" class="form-control" value="$!{stockGoods.unpackingTime}" data-rule="拆包登记时间:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">打印次数</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="printCount" name="printCount" class="form-control" value="$!{stockGoods.printCount}" data-rule="打印次数:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">客服责任占比</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="dutyRateCustomerService" name="dutyRateCustomerService" class="form-control" value="$!{stockGoods.dutyRateCustomerService}" data-rule="客服责任占比:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">采销责任占比</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="dutyRateSales" name="dutyRateSales" class="form-control" value="$!{stockGoods.dutyRateSales}" data-rule="采销责任占比:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">承运商责任占比</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="dutyRateCarrier" name="dutyRateCarrier" class="form-control" value="$!{stockGoods.dutyRateCarrier}" data-rule="承运商责任占比:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">供应商责任占比</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="dutyRateVendor" name="dutyRateVendor" class="form-control" value="$!{stockGoods.dutyRateVendor}" data-rule="供应商责任占比:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">绑定时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="bindingTime" name="bindingTime" class="form-control" value="$!{stockGoods.bindingTime}" data-rule="绑定时间:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">备注</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="remark" name="remark" class="form-control" value="$!{stockGoods.remark}" data-rule="备注:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">数据版本</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="version" name="version" class="form-control" value="$!{stockGoods.version}" data-rule="数据版本:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">创建人</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="createUser" name="createUser" class="form-control" value="$!{stockGoods.createUser}" data-rule="创建人:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">创建时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="createTime" name="createTime" class="form-control" value="$!{stockGoods.createTime}" data-rule="创建时间:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">修改人</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="updateUser" name="updateUser" class="form-control" value="$!{stockGoods.updateUser}" data-rule="修改人:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">修改时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="updateTime" name="updateTime" class="form-control" value="$!{stockGoods.updateTime}" data-rule="修改时间:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">是否删除（1：是；0：否）</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="isDelete" name="isDelete" class="form-control" value="$!{stockGoods.isDelete}" data-rule="是否删除（1：是；0：否）:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="code">时间戳</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="ts" name="ts" class="form-control" value="$!{stockGoods.ts}" data-rule="时间戳:required" data-msg-required="{0}不能为空" maxlength="255"/>
+                            </div>
+                        </div>
+                        <hr class="hr hr-32"/>
+                        <div class="center">
+                            <a id="btnSave" class="button button-primary button-rounded button-normal" href="javascript:void(0)" >保存</a>
+                            <a id="btnBack" class="button button-caution button-rounded button-normal" href="#springUrl('')/web/stock/stockgoods/listPage" >返回</a>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
